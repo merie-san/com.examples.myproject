@@ -31,4 +31,4 @@ jobs:
             java-version: 8
 
       -  name: Build with Maven
-         run: maven -f myproject/pom.xml clen verify
+         run: maven -f myproject/pom.xml clean verify
