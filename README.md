@@ -1,2 +1,2 @@
 # Running example for course of Automatic Software Testing on Continuous Integration year 2024-2025 University of Florence master Software: Science and Technology
-[![Java CI with Maven in Linux](https://github.com/merie-san/com.examples.myproject/actions/workflows/linux.yml/badge.svg)](https://github.com/merie-san/com.examples.myproject/actions/workflows/linux.yml)
+[![Java CI with Maven in Linux](https://github.com/merie-san/com.examples.myproject/actions/workflows/linux.yml/badge.svg)](https://github.com/merie-san/com.examples.myproject/actions/workflows/linux.yml) [![Coverage Status](https://coveralls.io/repos/github/merie-san/com.examples.myproject/badge.svg)](https://coveralls.io/github/merie-san/com.examples.myproject)
