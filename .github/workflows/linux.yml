@@ -7,13 +7,14 @@ on:
 jobs:
    buid:
       runs-on: ubuntu-latest
+      env:
+         workdir: myproject
       strategy:
          fail-fast: false
          matrix:
             include:
             -  java: 8
-               additional-maven-args: -Pjacoco -DrepoToken=$COVERALLS_REPO_TOKEN -DpullRequest=${{ github.event.pull_request.number
-                  }} coveralls:report
+               additional-maven-args: -Pcoveralls -DrepoToken=$COVERALLS_REPO_TOKEN -DpullRequest=${{ github.event.pull_request.number }}
             -  java: 11
       name: Build with Java ${{matrix.java}} on Linux
       steps:
@@ -29,11 +30,13 @@ jobs:
             key: ${{ runner.os }}-m2-jdk${{matrix.java}}-${{ hashFiles('**/pom.xml','**/*.yml') }}
             restore-keys: ${{ runner.os }}-m2-
       -  name: Build with Maven
-         run: mvn -f myproject/pom.xml clean verify ${{matrix.additional-maven-args}}
+         run: mvn verify ${{matrix.additional-maven-args}}
+         working-directory: ${{env.workdir}}
          env:
             COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_TOKEN}}
       -  name: Generate Junit Report
-         run: mvn -f myproject/pom.xml surefire-report:report-only site:site -DgenerateReports=false
+         run: mvn surefire-report:report-only site:site -DgenerateReports=false
+         working-directory: ${{env.workdir}}
          if: ${{always()}}
       -  name: Archive Junit Report
          uses: actions/upload-artifact@v4
